@@ -4,6 +4,31 @@
 	<title></title>
 </head>
 <body>
-<script src="main.js"></script>
+	<div class="container">
+		<div id='weatherData'>
+			<h2 id="cityName"></h2>
+			<div class="row">
+				<p class="col-md-4" id="temp"></p>
+				<p class="col-md-4" id="desc"></p>
+				<!-- <p class="col-md-4" id="img"></p> -->
+				<p class="col-md-4" ><img id="img" src=""></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Search your city</h2>
+			</div>
+			<div class="col-md-6">
+				<button id="unitSwitch">Switch to Fahrenheit</button>
+			</div>
+		</div>
+		<div class="input-group mb-3">
+		  <input type="text" class="form-control" placeholder="City" aria-label="City" aria-describedby="basic-addon2" id="city">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" type="button" id='submit'>Search</button>
+		  </div>
+		</div>
+	</div>
+	<script src="main.js"></script>
 </body>
 </html>
