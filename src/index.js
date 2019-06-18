@@ -8,6 +8,7 @@ const apiCall = async (city, unit) => {
 			city: data.name,
 	      	temp: Math.round(data.main.temp),
 	      	description: data.weather[0].description,
+	      	wind: data.wind.speed,
 	      	iconId: data.weather[0].icon
 	    }
 		displayWeather(weather)
@@ -18,55 +19,63 @@ const apiCall = async (city, unit) => {
 
 
 const metric = {
-	name: "metric",
-	icon: "C"
+	system: "metric",
+	icon: "C",
+	name: 'Celcius'
 }
 
 const imperial = {
-	name: "imperial",
-	icon: "K"
+	system: "imperial",
+	icon: "F",
+	name: 'Fahrenheit'
 }
 
 let currentUnit = metric
 
 const handleError = () => {
 	const city = document.getElementById('cityName')
+	const temp = document.getElementById('temp')
+	const description = document.getElementById('desc')
+	const wind = document.getElementById("wind")
 	city.textContent = 'City not found'
+	img.src = ''
+	temp.textContent = null
+	description.textContent = null
+	wind.textContent = null
 }
 
 const getWeather = () => {
 	const city = document.getElementById('city').value
-	apiCall(city, currentUnit.name)
+	apiCall(city, currentUnit.system )
 }
 
 const displayWeather = (weather) => {
 	const weatherData = document.getElementById('weatherData')
-	// weatherData.innerHTML = null
-	console.log(weather)
 	const temp = document.getElementById('temp')
 	const city = document.getElementById('cityName')
 	const description = document.getElementById('desc')
-	// const imgP = document.getElementById("img")
+	const wind = document.getElementById("wind")
 	const img = document.getElementById('img')
 	img.src = `http://openweathermap.org/img/w/${weather.iconId}.png`
-	temp.textContent = weather.temp + currentUnit.icon
+	temp.innerHTML = `${weather.temp} &#176${currentUnit.icon}`
 	description.textContent = weather.description
+	wind.textContent = `Wind: ${weather.wind} m/s`
 	cityName.textContent = weather.city
-	// weatherData.appendChild(city)
-	// weatherData.appendChild(temp)
-	// weatherData.appendChild(description)
-	// imgP.appendChild(img)
 }
 
 const switchUnitButton = document.getElementById('unitSwitch')
 
 const switchUnits = () => {
-	if (currentUnit = metric) {
+	if (currentUnit === metric) {
 		currentUnit = imperial
-		switchUnitButton.textContent = "Switch to Celcius"
+		switchUnitButton.textContent = currentUnit.name
+		switchUnitButton.classList.remove("btn-info")
+		switchUnitButton.classList.add("btn-primary")
 	} else {
 		currentUnit = metric
-		switchUnitButton.textContent = "Switch to Fahrenheit"
+		switchUnitButton.textContent = currentUnit.name
+		switchUnitButton.classList.remove("btn-primary")
+		switchUnitButton.classList.add("btn-info")
 	}
 }
 
