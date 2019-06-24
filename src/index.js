@@ -8,7 +8,7 @@ const apiCall = async (city, unit) => {
 			city: data.name,
 	      	temp: Math.round(data.main.temp),
 	      	description: data.weather[0].description,
-	      	wind: data.wind.speed,
+	      	wind: Math.round(data.wind.speed),
 	      	iconId: data.weather[0].icon
 	    }
 		displayWeather(weather)
@@ -21,13 +21,15 @@ const apiCall = async (city, unit) => {
 const metric = {
 	system: "metric",
 	icon: "C",
-	name: 'Celcius'
+	name: 'Celcius',
+	wind: "m/s"
 }
 
 const imperial = {
 	system: "imperial",
 	icon: "F",
-	name: 'Fahrenheit'
+	name: 'Fahrenheit',
+	wind: "knots"
 }
 
 let currentUnit = metric
@@ -50,7 +52,6 @@ const getWeather = () => {
 }
 
 const displayWeather = (weather) => {
-	const weatherData = document.getElementById('weatherData')
 	const temp = document.getElementById('temp')
 	const city = document.getElementById('cityName')
 	const description = document.getElementById('desc')
@@ -58,9 +59,9 @@ const displayWeather = (weather) => {
 	const img = document.getElementById('img')
 	img.src = `http://openweathermap.org/img/w/${weather.iconId}.png`
 	temp.innerHTML = `${weather.temp} &#176${currentUnit.icon}`
-	description.textContent = weather.description
-	wind.textContent = `Wind: ${weather.wind} m/s`
-	cityName.textContent = weather.city
+	desc.textContent = weather.description
+	wind.textContent = `Wind: ${weather.wind} ${currentUnit.wind}`
+	city.textContent = weather.city
 }
 
 const switchUnitButton = document.getElementById('unitSwitch')
