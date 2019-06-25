@@ -4,6 +4,35 @@
 	<title></title>
 </head>
 <body>
-<script src="main.js"></script>
+	<div class="container">
+		<div class="row">
+			<div class=" col-md-12 my-3">
+				<button id="unitSwitch" class="btn btn-info float-right">Celcius</button>
+			</div>
+		</div>
+		<div id='weatherData', class="card text-center mb-5 py-5">
+			<div class="row py-3">
+				<div class="col-md-6">
+					<h1 class="float-right" id="cityName">Search your city</h1>
+				</div>
+				<div class="col-md-6">
+					<img class="float-left" id="img" src="">
+				</div>
+			</div>
+				
+			<div class="row">
+				<h3 class="col-md-4" id="temp"></h3>
+				<h6 class="col-md-4" id="desc"></h6>
+				<h6 class="col-md-4" id="wind" ></h6>
+			</div>
+		</div>
+		<div class="input-group mb-3">
+		  <input type="text" class="form-control" placeholder="City" aria-label="City" aria-describedby="basic-addon2" id="city">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" type="button" id='submit'>Search</button>
+		  </div>
+		</div>
+	</div>
+	<script src="main.js"></script>
 </body>
 </html>
